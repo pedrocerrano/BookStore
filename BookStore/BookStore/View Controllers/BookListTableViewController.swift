@@ -10,55 +10,53 @@ import UIKit
 class BookListTableViewController: UITableViewController {
 
     
+    //MARK: - LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    }
+    } //: DidLOAD
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    } //: WillAPPEAR
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return 1
-    }
+        return BookController.sharedInstance.books.count
+    } //: #ROWS
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath)
-
-        // Configure the cell...
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath) as? BookTableViewCell else { return UITableViewCell() }
+        cell.selectionStyle = .none
+        
+        let bookIndex = BookController.sharedInstance.books[indexPath.row]
+        cell.updateView(with: bookIndex)
 
         return cell
-    }
+    } //: CONFIG CELL
 
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            let deleteThisBook = BookController.sharedInstance.books[indexPath.row]
+            BookController.sharedInstance.deleteBook(bookToDelete: deleteThisBook)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
+        } //: CONDITIONAL
+    } //: DELETE CELL
+    
 
-    /*
+
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
+        if segue.identifier == "toDetailVC" {
+            if let index = tableView.indexPathForSelectedRow {
+                if let destinationVC = segue.destination as? BookDetailVC {
+                    let bookToPass = BookController.sharedInstance.books[index.row]
+                    destinationVC.bookReceiver = bookToPass
+                }
+            } //: INDEX
+        } //: IDENTIFIER
+    } //: SEGUE
+    
+} //: CLASS

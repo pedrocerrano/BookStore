@@ -17,33 +17,54 @@ class BookDetailVC: UIViewController {
     @IBOutlet weak var clearButton: UIButton!
     
     
+    //MARK: - PROPERTIES
+    var bookReceiver: Book?
+    
+    
     //MARK: - LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        updateView()
     } //: DidLOAD
     
 
     //MARK: - ACTIONS
     @IBAction func saveButtonTapped(_ sender: Any) {
+        guard let title     = bookTitleTextField.text,
+              let author    = bookAuthorTextField.text,
+              let rating    = bookRatingTextField.text,
+              let synopsis  = bookSynopsisTextView.text else { return }
         
-    }
+        if let book = bookReceiver {
+            BookController.sharedInstance.updateBook(bookToUpdate: book, newAuthor: author, newTitle: title, newRating: Double(rating) ?? 0, newSynopsis: synopsis)
+        } else {
+            BookController.sharedInstance.createBook(author: author, title: title, rating: Double(rating) ?? 0, synopsis: synopsis)
+        } //: CONDITIONAL
+        
+        navigationController?.popViewController(animated: true)
+    } //: SAVE TAPPED
     
     
     @IBAction func clearButtonTapped(_ sender: Any) {
-        
-    }
-    
-    
-    /*
-    // MARK: - Navigation
+        resetView()
+    } //: CLEAR TAPPED
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    //MARK: - HELPER FUNCTIONS
+    func updateView() {
+        guard let bookReceiver = bookReceiver else { return }
+        bookTitleTextField.text     = bookReceiver.title
+        bookAuthorTextField.text    = bookReceiver.author
+        bookRatingTextField.text    = "\(bookReceiver.rating) / 10"
+        bookSynopsisTextView.text   = bookReceiver.synopsis
+    } //: UPDATE HELPER
+    
+    
+    func resetView() {
+        bookTitleTextField.text     = ""
+        bookAuthorTextField.text    = ""
+        bookRatingTextField.text    = ""
+        bookSynopsisTextView.text   = ""
+    } //: CLEAR HELPER
 
 } //: CLASS

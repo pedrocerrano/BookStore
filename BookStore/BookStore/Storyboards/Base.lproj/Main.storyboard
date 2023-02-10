@@ -62,6 +62,12 @@
                                         <constraint firstAttribute="bottom" secondItem="E62-TD-VIZ" secondAttribute="bottom" constant="2" id="XdN-qG-INh"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="bookAuthorLabel" destination="ZiR-fj-UGc" id="iYR-IK-M77"/>
+                                    <outlet property="bookRatingLabel" destination="wZ7-S2-QYl" id="ZAZ-Pk-N1V"/>
+                                    <outlet property="bookTitleLabel" destination="ZDh-WN-EDA" id="MBJ-oQ-jnY"/>
+                                    <segue destination="rwG-9G-EKO" kind="show" identifier="toDetailVC" id="Kwj-bn-gPQ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -141,8 +147,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="qRH-6B-ZC4"/>
                                 </constraints>
+                                <color key="tintColor" systemColor="systemGray2Color"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Clear"/>
                                 <connections>
                                     <action selector="clearButtonTapped:" destination="rwG-9G-EKO" eventType="touchUpInside" id="L2Z-7f-MmH"/>
                                 </connections>
@@ -207,6 +214,9 @@
             <point key="canvasLocation" x="425" y="51"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Kwj-bn-gPQ"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="books.vertical" catalog="system" width="128" height="107"/>
         <systemColor name="labelColor">
@@ -214,6 +224,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
