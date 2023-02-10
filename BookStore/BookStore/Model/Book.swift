@@ -23,3 +23,11 @@ class Book {
     } //: MEMBER-WISE INITIALIZER
     
 } //: CLASS
+
+
+extension Book: Equatable {
+    static func == (lhs: Book, rhs: Book) -> Bool {
+        return lhs.lastUpdated == rhs.lastUpdated
+    } //: EQUALtoSELF
+    
+} //: EXTENSION
