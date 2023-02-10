@@ -24,11 +24,11 @@ class BookListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return BookController.sharedInstance.books.count
     } //: #ROWS
-
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55
-    } //: ROW HEIGHT
+//
+//
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 55
+//    } //: ROW HEIGHT
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,8 +47,8 @@ class BookListTableViewController: UITableViewController {
             let deleteThisBook = BookController.sharedInstance.books[indexPath.row]
             BookController.sharedInstance.deleteBook(bookToDelete: deleteThisBook)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } //: CONDITIONAL
-    } //: DELETE CELL
+        } //: DELETE CELL
+    } //: EDIT STYLE
     
 
 

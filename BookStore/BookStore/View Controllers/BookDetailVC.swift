@@ -16,6 +16,9 @@ class BookDetailVC: UIViewController {
     @IBOutlet weak var bookSynopsisTextView: UITextView!
     @IBOutlet weak var clearButton: UIButton!
     
+    @IBOutlet weak var bookRatingPickerView: UIPickerView!
+    
+    
     
     //MARK: - PROPERTIES
     var bookReceiver: Book?
@@ -75,20 +78,20 @@ class BookDetailVC: UIViewController {
         clearButton.backgroundColor     = .systemGray3
         clearButton.layer.cornerRadius  = 10
         clearButton.layer.borderWidth   = 1
-        clearButton.layer.borderColor   = UIColor.blue.cgColor
+        clearButton.layer.borderColor   = UIColor.systemBlue.cgColor
     }
 
 } //: CLASS
 
 
-extension BookDetailVC: UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        <#code#>
-    }
-    
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        <#code#>
-    }
-
-} //: EXTENSION
+//extension BookDetailVC: UIPickerViewDelegate, UIPickerViewDataSource {
+//
+//    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//        <#code#>
+//    }
+//
+//    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        <#code#>
+//    }
+//
+//} //: EXTENSION

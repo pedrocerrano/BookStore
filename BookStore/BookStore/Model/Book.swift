@@ -13,6 +13,7 @@ class Book {
     var lastUpdated: Date
     var rating: Double
     var synopsis: String
+    let uuid = UUID()
     
     init(author: String, title: String, lastUpdated: Date = Date(), rating: Double, synopsis: String) {
         self.author = author
@@ -27,7 +28,7 @@ class Book {
 
 extension Book: Equatable {
     static func == (lhs: Book, rhs: Book) -> Bool {
-        return lhs.lastUpdated == rhs.lastUpdated
+        return lhs.uuid == rhs.uuid
     } //: EQUALtoSELF
     
 } //: EXTENSION
