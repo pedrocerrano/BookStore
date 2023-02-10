@@ -16,17 +16,18 @@ class BookDetailVC: UIViewController {
     @IBOutlet weak var bookSynopsisTextView: UITextView!
     @IBOutlet weak var clearButton: UIButton!
     
-    @IBOutlet weak var bookRatingPickerView: UIPickerView!
-    
-    
     
     //MARK: - PROPERTIES
     var bookReceiver: Book?
-    
+//    let ratingInTenths = stride(from: 0, through: 10, by: 0.1)
     
     //MARK: - LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let picker = UIPickerView()
+//        bookRatingTextField.inputView = picker
+//        picker.delegate = self
+        
         updateView()
         configureButtonView()
     } //: DidLOAD
@@ -59,7 +60,7 @@ class BookDetailVC: UIViewController {
         guard let bookReceiver = bookReceiver else { return }
         bookTitleTextField.text     = bookReceiver.title
         bookAuthorTextField.text    = bookReceiver.author
-        bookRatingTextField.text    = "\(bookReceiver.rating) / 10"
+        bookRatingTextField.text    = "\(bookReceiver.rating)"
         bookSynopsisTextView.text   = bookReceiver.synopsis
     } //: UPDATE HELPER
     
@@ -85,13 +86,21 @@ class BookDetailVC: UIViewController {
 
 
 //extension BookDetailVC: UIPickerViewDelegate, UIPickerViewDataSource {
-//
-//    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        <#code#>
+//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//        return ratingInTenths.underestimatedCount
 //    }
 //
-//    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        <#code#>
+//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        return 1
 //    }
+//
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        return "\(ratingInTenths)"
+//    }
+//
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        bookRatingTextField.text = "\(ratingInTenths)"
+//    }
+//
 //
 //} //: EXTENSION
