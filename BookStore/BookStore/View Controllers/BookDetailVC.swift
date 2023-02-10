@@ -25,6 +25,7 @@ class BookDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateView()
+        configureButtonView()
     } //: DidLOAD
     
 
@@ -66,5 +67,28 @@ class BookDetailVC: UIViewController {
         bookRatingTextField.text    = ""
         bookSynopsisTextView.text   = ""
     } //: CLEAR HELPER
+    
+    
+    func configureButtonView() {
+        clearButton.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 17)
+        clearButton.tintColor           = .white
+        clearButton.backgroundColor     = .systemGray3
+        clearButton.layer.cornerRadius  = 10
+        clearButton.layer.borderWidth   = 1
+        clearButton.layer.borderColor   = UIColor.blue.cgColor
+    }
 
 } //: CLASS
+
+
+extension BookDetailVC: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        <#code#>
+    }
+    
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        <#code#>
+    }
+
+} //: EXTENSION
