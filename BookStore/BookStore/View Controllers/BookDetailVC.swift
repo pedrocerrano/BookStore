@@ -19,14 +19,18 @@ class BookDetailVC: UIViewController {
     
     //MARK: - PROPERTIES
     var bookReceiver: Book?
-//    let ratingInTenths = stride(from: 0, through: 10, by: 0.1)
+    
+    let picker = UIPickerView()
+    let ratingInTenths: [Double] = Array(stride(from: 0, through: 10, by: 0.1))
+
     
     //MARK: - LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let picker = UIPickerView()
-//        bookRatingTextField.inputView = picker
-//        picker.delegate = self
+
+        bookRatingTextField.inputView = picker
+        picker.delegate = self
+        picker.dataSource = self
         
         updateView()
         configureButtonView()
@@ -85,22 +89,21 @@ class BookDetailVC: UIViewController {
 } //: CLASS
 
 
-//extension BookDetailVC: UIPickerViewDelegate, UIPickerViewDataSource {
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return ratingInTenths.underestimatedCount
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return 1
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return "\(ratingInTenths)"
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        bookRatingTextField.text = "\(ratingInTenths)"
-//    }
-//
-//
-//} //: EXTENSION
+extension BookDetailVC: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return ratingInTenths.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(format: "%.1f", ratingInTenths[row])
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        bookRatingTextField.text = String(format: "%.1f", ratingInTenths[row])
+    }
+
+} //: EXTENSION
